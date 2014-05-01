@@ -1,8 +1,10 @@
 package com.isaacs.standalone;
 
-import junit.framework.Test;
+import org.junit.Test;
+import org.junit.Assert;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import com.isaacs.standalone.App;
 
 /**
  * Unit test for simple App.
@@ -23,7 +25,7 @@ public class AppTest
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite()
+    public static junit.framework.Test suite()
     {
         return new TestSuite( AppTest.class );
     }
@@ -35,4 +37,13 @@ public class AppTest
     {
         assertTrue( true );
     }
+    
+    @Test
+	public void testLengthOfTheUniqueKey() {
+ 
+		App obj = new App();
+		Assert.assertEquals(36, obj.generateUniqueKey().length());
+ 
+	}
+    
 }
