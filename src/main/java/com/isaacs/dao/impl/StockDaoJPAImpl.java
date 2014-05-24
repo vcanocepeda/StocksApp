@@ -88,7 +88,8 @@ public class StockDaoJPAImpl implements Serializable, StockDao {
 			stock = (Stock) query.getSingleResult();
 		} catch (Exception e) {
 			//this.em.getTransaction().rollback();
-			e.printStackTrace();
+			//e.printStackTrace();
+			stock = null;
 			logger.error(e);
 		}
 		return stock;

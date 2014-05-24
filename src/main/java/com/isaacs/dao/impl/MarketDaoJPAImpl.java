@@ -62,8 +62,8 @@ public class MarketDaoJPAImpl implements Serializable, MarketDao {
 					.createQuery("SELECT m from Market m where m.code=:code")
 					.setParameter("code", marketCode).getSingleResult();
 		} catch (Exception e) {
-			this.em.getTransaction().rollback();
-			e.printStackTrace();
+		//	this.em.getTransaction().rollback();
+		//	e.printStackTrace();
 			logger.error(e);
 		}
 		return market;

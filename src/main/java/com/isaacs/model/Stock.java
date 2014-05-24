@@ -1,5 +1,7 @@
 package com.isaacs.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +20,8 @@ public class Stock
   private String code = "";
   private String name = "";
   private Market market = null;
-  private Integer idmarket;
+//  private Integer idmarket;
+//  private List<Price> prices = null;
   
   public Stock() {}
   
@@ -73,4 +77,15 @@ public class Stock
   {
     this.market = market;
   }
+  
+/*  @OneToMany(mappedBy="stock", cascade={javax.persistence.CascadeType.ALL})
+  public List<Price> getPrices()
+  {
+    return this.prices;
+  }
+  
+  public void setStocks(List<Price> prices)
+  {
+    this.prices = prices;
+  } */
 }
