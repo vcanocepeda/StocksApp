@@ -11,7 +11,6 @@ import com.isaacs.webservices.StocksWebServiceSoap;
 @WebService(endpointInterface = "com.isaacs.webservices.StocksWebService")
 public class StocksWebServiceImpl implements StocksWebServiceSoap {
 
-	@Override
 	public Price getLastPriceFromStock(Stock stock) {
 		PriceDao priceDao = new PriceDaoJPAImpl();
 		Price price = new Price();

@@ -49,7 +49,6 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 		
 	}
 
-	@Override
 	public void delete(Price price) {
 		try {
 			this.em.getTransaction().begin();
@@ -65,7 +64,6 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 		
 	}
 
-	@Override
 	public Price findByPriceId(Integer id) {
 		Price price = new Price();
 		try {
