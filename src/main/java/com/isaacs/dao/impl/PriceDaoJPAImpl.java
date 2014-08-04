@@ -3,6 +3,7 @@ package com.isaacs.dao.impl;
 import com.isaacs.dao.PriceDao;
 import com.isaacs.model.Market;
 import com.isaacs.model.Price;
+import com.isaacs.model.Stock;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-public class PriceDaoJPAImpl implements Serializable, PriceDao{
+public class PriceDaoJPAImpl implements Serializable, PriceDao {
 
 	private static final long serialVersionUID = -8471891881478662779L;
 	static Logger logger = Logger.getLogger(StockDaoJPAImpl.class);
@@ -30,7 +31,7 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 		this.em = this.emf.createEntityManager();
 		logger.info("EntityManager created: em " + this.em.toString());
 	}
-	
+
 	public void save(Price price) { // We should return the id to test 1
 		try {
 			this.em.getTransaction().begin();
@@ -46,7 +47,7 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 			e.printStackTrace();
 			logger.error(e);
 		}
-		
+
 	}
 
 	public void delete(Price price) {
@@ -58,10 +59,10 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 			logger.info("EntityStock removed: price " + price.getValue());
 		} catch (Exception e) {
 			this.em.getTransaction().rollback();
-		//	e.printStackTrace();
+			// e.printStackTrace();
 			logger.error(e);
 		}
-		
+
 	}
 
 	public Price findByPriceId(Integer id) {
@@ -69,14 +70,14 @@ public class PriceDaoJPAImpl implements Serializable, PriceDao{
 		try {
 			price = (Price) this.em.getReference(Price.class, id);
 		} catch (Exception e) {
-		//	this.em.getTransaction().rollback();
-		//	e.printStackTrace();
+			// this.em.getTransaction().rollback();
+			// e.printStackTrace();
 			price = null;
 			logger.error(e);
 		}
 		return price;
 	}
-	
+
 	public void CloseEntityManager() {
 		this.em.close();
 		logger.info("EntityManager destroyed: em " + this.em.toString());

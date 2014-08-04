@@ -4,6 +4,7 @@ import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 
 import com.isaacs.dao.impl.*;
 import com.isaacs.model.*;
+import com.isaacs.webservices.impl.MarketWebServiceRestImpl;
 import com.isaacs.webservices.impl.StocksWebServiceRestImpl;
 
 
@@ -13,8 +14,8 @@ public class StockPrizeSaveApp {
 //		StockPrizeSaveApp app = new StockPrizeSaveApp();
 //		app.createMarket();
 		JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
-		sf.setResourceClasses(StocksWebServiceRestImpl.class);
-		sf.setAddress("http://localhost:9000/");
+		sf.setResourceClasses(StocksWebServiceRestImpl.class, MarketWebServiceRestImpl.class);
+		sf.setAddress("http://localhost:9001");
 		sf.create();
 
 	}
