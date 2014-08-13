@@ -1,3 +1,35 @@
+There are basically two options:
+
+JPA and JAXB annotations on the same classes (see Hyperjaxb3 or DataNucleus)
+Or you keep them separated and write code to map one onto another
+I personally do not see much added value in the cross-model mapping code.
+ Usage of factories also does not seem too innovative, it is just a question 
+ of programming technique which you use to map one onto another.
+JPA and JAXB in the same entities
+
+Read DataNucleus convert JPA to JAXB entities
+This can definitely be done. I actually find the prospect of maintaining code to copy between the models more problematic.
+
+EclipseLink is a great choice for this application as it contains both a JPA (EclipseLink is the RI and open sourced from TopLink), and a JAXB implementation.
+
+EclipeLink JAXB (MOXy) also contains a number of extensions for mapping JPA entities to XML:
+
+XPath base mappings
+Mapping bi-directional relationships (using @XmlInvereseReference)
+Handling composite key relationships
+Handling embedded key classes
+Handling java.sql.* types
+For more information see:
+
+http://wiki.eclipse.org/EclipseLink/Examples/MOXy/JPA
+
+http://quartz-scheduler.org/overview/quick-start
+
+we could delete easily a stock
+but we will find difficulties to delete a market
+http://www.mkyong.com/java/how-to-run-a-task-periodically-in-java/
+ 
+http://javarevisited.blogspot.ie/2013/02/what-is-timer-and-timertask-in-java-example-tutorial.html
 <<<<<<< HEAD
 StocksApp
 =========
