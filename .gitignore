@@ -1,0 +1,6 @@
+/.git
+/bin
+/target
+/logs
+/.settings
+.classpath
