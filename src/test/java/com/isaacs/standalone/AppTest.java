@@ -8,7 +8,6 @@ import junit.framework.TestSuite;
 
 import com.isaacs.dao.impl.*;
 import com.isaacs.model.*;
-import com.isaacs.standalone.App;
 
 /**
  * Unit test for simple App.

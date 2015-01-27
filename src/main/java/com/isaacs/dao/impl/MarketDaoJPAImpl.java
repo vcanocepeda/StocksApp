@@ -2,14 +2,12 @@ package com.isaacs.dao.impl;
 
 import com.isaacs.dao.MarketDao;
 import com.isaacs.model.Market;
-
+import com.isaacs.standalone.AppInit;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class MarketDaoJPAImpl implements Serializable, MarketDao {
 
@@ -18,21 +16,16 @@ public class MarketDaoJPAImpl implements Serializable, MarketDao {
 	 */
 	private static final long serialVersionUID = 3204732623661515600L;
 	static Logger logger = Logger.getLogger(MarketDaoJPAImpl.class);
-	private EntityManagerFactory emf;
 	private EntityManager em;
 
 	public MarketDaoJPAImpl() {
-		CreateEntityManager();
-	}
-
-	public void CreateEntityManager() {
-		this.emf = Persistence.createEntityManagerFactory("stocksApp");
-		this.em = this.emf.createEntityManager();
+		this.em = AppInit.createEntityManager();
 		logger.info("EntityManager created: em "
 				+ this.em.toString());
 	}
 
-	public void save(Market market) {
+	public String save(Market market) {
+		String error = null;
 		try {
 			this.em.getTransaction().begin();
 			if (!this.em.contains(market)) {
@@ -46,13 +39,32 @@ public class MarketDaoJPAImpl implements Serializable, MarketDao {
 			this.em.getTransaction().rollback();
 			e.printStackTrace();
 			logger.error(e);
-		}
+			error = e.getCause().getCause().getClass().getCanonicalName();
+		}	
+		return error;
 	}
 
 	public void update(Market market) {
 	}
 
-	public void delete(Market Market) {
+	public String delete(Market market) {
+		String error = null;
+		try {
+			this.em.getTransaction().begin();
+			if (this.em.contains(market)) {
+				this.em.remove(market);
+
+				this.em.flush();
+			}
+			this.em.getTransaction().commit();
+			logger.info("EntityMarket deleted: market " + market.getCode());
+		} catch (Exception e) {
+			this.em.getTransaction().rollback();
+			e.printStackTrace();
+			logger.error(e);
+			error = e.getCause().getCause().getClass().getCanonicalName();
+		}	
+		return error;
 	}
 
 	public Market findByMarketCode(String marketCode) {
@@ -62,8 +74,6 @@ public class MarketDaoJPAImpl implements Serializable, MarketDao {
 					.createQuery("SELECT m from Market m where m.code=:code")
 					.setParameter("code", marketCode).getSingleResult();
 		} catch (Exception e) {
-		//	this.em.getTransaction().rollback();
-		//	e.printStackTrace();
 			logger.error(e);
 		}
 		return market;

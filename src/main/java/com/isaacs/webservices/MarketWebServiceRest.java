@@ -28,5 +28,10 @@ public interface MarketWebServiceRest {
 	@Path("/addMarketXml")
 	@Produces(MediaType.APPLICATION_XML)
 	public Response addMarketXml(Market market);
+	
+	@POST
+	@Path("/delMarketXml")
+	@Produces(MediaType.APPLICATION_XML)
+	public Response delMarketXml(Market market);
 
 }
